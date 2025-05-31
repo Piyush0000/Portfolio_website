@@ -26,4 +26,3 @@ CSS3
 JavaScript
 
 (Optional Enhancements: Scroll animations, dark mode, particle background, etc.)
-
