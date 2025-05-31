@@ -1,0 +1,778 @@
+:root {
+  --primary: #1abc9c; /* Teal */
+  --secondary: #34495e; /* Dark blue */
+  --accent: #e74c3c; /* Red */
+  --light: #ecf0f1; /* Light gray for text */
+  --text: #ecf0f1; /* Light gray for text */
+  --text-light: #bdc3c7; /* Lighter gray for secondary text */
+  --background: #2c3e50; /* Dark blue for background */
+  --card-bg: #34495e; /* Slightly lighter dark blue for cards */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  color: var(--text);
+  line-height: 1.6;
+  background-color: #000; /* Changed to black for starry background */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative; /* For positioning the background effects */
+}
+
+/* Apply star background to entire body */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-opacity='0.3'%3E%3Ccircle r='1' cx='100' cy='100'/%3E%3Ccircle r='1.5' cx='200' cy='50'/%3E%3Ccircle r='1' cx='300' cy='150'/%3E%3Ccircle r='2' cx='400' cy='30'/%3E%3Ccircle r='1' cx='500' cy='120'/%3E%3Ccircle r='1.5' cx='600' cy='70'/%3E%3Ccircle r='1' cx='700' cy='180'/%3E%3Ccircle r='0.5' cx='50' cy='250'/%3E%3Ccircle r='1' cx='150' cy='220'/%3E%3Ccircle r='1.5' cx='250' cy='300'/%3E%3Ccircle r='1' cx='350' cy='240'/%3E%3Ccircle r='2' cx='450' cy='350'/%3E%3Ccircle r='1' cx='550' cy='270'/%3E%3Ccircle r='0.5' cx='650' cy='320'/%3E%3Ccircle r='1' cx='750' cy='290'/%3E%3Ccircle r='0.5' cx='50' cy='400'/%3E%3Ccircle r='1' cx='150' cy='460'/%3E%3Ccircle r='1.5' cx='250' cy='420'/%3E%3Ccircle r='1' cx='350' cy='500'/%3E%3Ccircle r='0.5' cx='450' cy='450'/%3E%3Ccircle r='1.5' cx='550' cy='520'/%3E%3Ccircle r='1' cx='650' cy='480'/%3E%3Ccircle r='2' cx='750' cy='560'/%3E%3Ccircle r='1' cx='50' cy='600'/%3E%3Ccircle r='0.5' cx='150' cy='570'/%3E%3Ccircle r='1.5' cx='250' cy='650'/%3E%3Ccircle r='1' cx='350' cy='620'/%3E%3Ccircle r='2' cx='450' cy='700'/%3E%3Ccircle r='1' cx='550' cy='680'/%3E%3Ccircle r='0.5' cx='650' cy='750'/%3E%3Ccircle r='1' cx='750' cy='720'/%3E%3C/g%3E%3C/svg%3E"),
+    #000;
+  animation: moveSky 60s linear infinite;
+  z-index: -2;
+}
+
+/* Add twinkling stars effect to entire body */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, white 1px, transparent 2px),
+    radial-gradient(circle at 50% 10%, white 1px, transparent 2px),
+    radial-gradient(circle at 80% 40%, white 1px, transparent 2px),
+    radial-gradient(circle at 30% 70%, white 1px, transparent 2px),
+    radial-gradient(circle at 70% 80%, white 1px, transparent 2px);
+  background-size: 200% 200%;
+  animation: twinkle 3s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+/* Add shooting stars to the entire page */
+.shooting-star {
+  position: fixed;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+  z-index: -1;
+}
+
+.shooting-star:nth-child(1) {
+  top: 20%;
+  left: 30%;
+  animation: shootingStar 8s linear infinite;
+  animation-delay: 1s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 60%;
+  left: 10%;
+  animation: shootingStar 10s linear infinite;
+  animation-delay: 4s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 30%;
+  left: 70%;
+  animation: shootingStar 7s linear infinite;
+  animation-delay: 7s;
+}
+
+/* Add a fourth shooting star for more effect */
+.shooting-star:nth-child(4) {
+  top: 75%;
+  left: 50%;
+  animation: shootingStar 12s linear infinite;
+  animation-delay: 9s;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header styles */
+header {
+  background-color: rgba(
+    52,
+    73,
+    94,
+    0.9
+  ); /* Semi-transparent for starry background to show through */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--light);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 30px;
+}
+
+.nav-links a {
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Mobile navigation menu */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Hero section styles */
+#home {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+}
+
+@keyframes moveSky {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  flex: 1;
+  padding-right: 50px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: #fff; /* White for better visibility on black background */
+}
+
+.hero-text h2 {
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.hero-text p {
+  font-size: 18px;
+  color: #ddd; /* Light gray for better visibility on black */
+  margin-bottom: 30px;
+}
+
+.profile-pic {
+  flex: 0 0 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Increased shadow for black background */
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--primary); /* Add border for better visibility */
+}
+
+.profile-pic img {
+  width: 100%;
+  height: auto;
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+/* Section styles */
+section {
+  padding: 100px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  color: var(--light);
+  display: inline-block;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background-color: var(--primary);
+}
+
+/* About section */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.skill-category h3 {
+  margin-bottom: 15px;
+  color: var(--light);
+}
+
+.skill-list {
+  list-style: none;
+}
+
+.skill-list li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.skill-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Experience section */
+.experience-item {
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: rgba(
+    52,
+    73,
+    94,
+    0.8
+  ); /* Semi-transparent for starry background to show through */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(5px); /* Add blur effect to make text more readable */
+}
+
+.experience-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.experience-item h3 {
+  margin-bottom: 10px;
+  color: var(--light);
+}
+
+.experience-item .meta {
+  color: var(--text-light);
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Projects section */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background-color: rgba(
+    52,
+    73,
+    94,
+    0.8
+  ); /* Semi-transparent for starry background to show through */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeIn 0.5s ease-in-out;
+  backdrop-filter: blur(5px); /* Add blur effect to make text more readable */
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-img {
+  height: 200px;
+  background-color: rgba(
+    26,
+    26,
+    26,
+    0.7
+  ); /* Darker semi-transparent background for image placeholder */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.project-info {
+  padding: 25px;
+}
+
+.project-info h3 {
+  margin-bottom: 15px;
+  color: var(--light);
+}
+
+.project-info p {
+  margin-bottom: 20px;
+  color: var(--text-light);
+}
+
+.tech-stack {
+  margin-bottom: 20px;
+}
+
+.tech-stack h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--light);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-tag {
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
+  color: var(--primary);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Contact section */
+#contact {
+  background-color: rgba(
+    52,
+    73,
+    94,
+    0.8
+  ); /* Semi-transparent for starry background to show through */
+  color: white;
+  backdrop-filter: blur(5px); /* Add blur effect to make text more readable */
+}
+
+#contact .section-title h2 {
+  color: white;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.contact-info p {
+  margin-bottom: 30px;
+}
+
+.contact-links {
+  list-style: none;
+}
+
+.contact-links li {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-links a {
+  color: var(--light);
+  transition: color 0.3s;
+}
+
+.contact-links a:hover {
+  color: var(--primary);
+}
+
+.contact-form {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+/* Footer */
+footer {
+  background-color: rgba(26, 37, 47, 0.9); /* Semi-transparent background */
+  color: white;
+  padding: 30px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.footer-links li {
+  margin: 0 15px;
+}
+
+.footer-links a {
+  color: var(--light);
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.copyright {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shooting star animation */
+@keyframes shootingStar {
+  0% {
+    transform: translate(-5%, -5%) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translate(105%, 105%) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Theme toggle */
+#theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  color: var(--text);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+#theme-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* RESPONSIVE STYLES - Enhanced for better mobile experience */
+
+/* Tablet Responsive Styles */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-text {
+    padding-right: 0;
+    margin-top: 40px;
+  }
+
+  .about-content,
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-pic {
+    margin: 0 auto;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  /* Hide navigation links by default on mobile */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(52, 73, 94, 0.95);
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* When nav is open with .nav-active class */
+  .nav-links.nav-active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-text h2 {
+    font-size: 20px;
+  }
+
+  .profile-pic {
+    flex: 0 0 250px;
+    height: 250px;
+  }
+
+  section {
+    padding: 70px 0;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+
+  .tech-tags {
+    justify-content: center;
+  }
+
+  .project-links {
+    justify-content: center;
+  }
+
+  /* Make footer links stack on mobile */
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links li {
+    margin: 10px 0;
+  }
+}
+
+/* Small Mobile Responsive Styles */
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text h2 {
+    font-size: 18px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+  .profile-pic {
+    flex: 0 0 200px;
+    height: 200px;
+  }
+
+  .experience-item,
+  .project-info {
+    padding: 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
