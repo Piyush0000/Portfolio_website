@@ -7,7 +7,7 @@ I’m Piyush — a tech enthusiast who loves exploring AI and creating web-based
 
 🔍 Preview
 
-🌐 Live Site: Coming Soon (or add your hosted link here)
+🌐 Live Site: Coming Soon 
 
 🚀 Features
 🌌 Clean and simple one-page design
@@ -18,11 +18,4 @@ I’m Piyush — a tech enthusiast who loves exploring AI and creating web-based
 
 🌟 Responsive layout (basic)
 
-🛠️ Built With
-HTML5
 
-CSS3
-
-JavaScript
-
-(Optional Enhancements: Scroll animations, dark mode, particle background, etc.)
