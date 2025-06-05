@@ -215,6 +215,7 @@
                 Analyzing how people are using public transport like buses,
                 metro, and local trains in real-time.
               </p>
+
               <div class="tech-stack">
                 <h4>Tech Stack:</h4>
                 <div class="tech-tags">
@@ -249,6 +250,51 @@
               </div>
             </div>
           </div>
+          <div class="project-card">
+            <div class="project-img">
+              <img
+                src="bicep_tracker_ss.png"
+                alt="Bicep Tracker Screenshot"
+                height="200px"
+                width="300px"
+              />
+            </div>
+            <div class="project-info">
+              <h3>🔹 Bicep Tracker – AI Fitness Assistant</h3>
+              <p>
+                An AI-powered fitness tracking application that monitors bicep
+                curl exercises using computer vision to count reps and provide
+                form feedback.
+              </p>
+              <div class="tech-stack">
+                <h4>Tech Stack:</h4>
+                <div class="tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">OpenCV</span>
+                  <span class="tech-tag">MediaPipe</span>
+                  <span class="tech-tag">NumPy</span>
+                  <span class="tech-tag">Streamlit</span>
+                </div>
+              </div>
+              <div class="features">
+                <h4>Features:</h4>
+                <ul>
+                  <li>Real-time pose detection</li>
+                  <li>Automatic rep counting</li>
+                  <li>Form analysis and feedback</li>
+                  <li>Progress tracking</li>
+                </ul>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Piyush0000/bicep-tracker"
+                  class="project-link"
+                  >GitHub Repo</a
+                >
+                <a href="#" class="project-link">Live Demo</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -268,7 +314,7 @@
             <ul class="contact-links">
               <li>
                 <i class="icon">📧</i>
-                <a href="rathorepiyush0000@gmail.com"
+                <a href="mailto:rathorepiyush0000@gmail.com"
                   >rathorepiyush0000@gmail.com</a
                 >
               </li>
@@ -323,7 +369,61 @@
       </div>
     </footer>
 
-    <!-- Simple JavaScript for smooth scrolling -->
+    <!-- Firebase SDK -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDM52r0WIlixTIpRXyPOtgWTL6dj_pLxaQ",
+        authDomain: "contactinfo-56cad.firebaseapp.com",
+        projectId: "contactinfo-56cad",
+        storageBucket: "contactinfo-56cad.firebasestorage.app",
+        messagingSenderId: "218745155170",
+        appId: "1:218745155170:web:024f2c765ffccc91402b3b",
+        measurementId: "G-RTZR8BNCJG",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+
+      // Contact form submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+
+          try {
+            await addDoc(collection(db, "contacts"), {
+              name: name,
+              email: email,
+              message: message,
+              timestamp: new Date(),
+            });
+
+            alert("Message sent successfully!");
+            document.getElementById("contactForm").reset();
+          } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Error sending message. Please try again.");
+          }
+        });
+    </script>
+
+    <!-- JavaScript for smooth scrolling -->
     <script src="script.js"></script>
   </body>
 </html>
